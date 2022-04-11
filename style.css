@@ -19,16 +19,22 @@ h1 {
 
 .calculadora {
     display: grid;
-    width: 30%;
+    width: 22%;
     margin: auto;
+    margin-bottom: 20px;
+
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     border: 10px solid rgb(0, 0, 0);
     gap: 10px;
     height: 400px;
-    padding: 2px;
+    padding: 15px;
+    background-color: #606060;
+    box-shadow: inset 2px 2px 2px rgba(255,255,255,.7);
+    border-radius: 5%;
 
-    grid-template-areas: "CE    Delete     Delete   button"
+    grid-template-areas: "display   display    display  display "  
+                         "CE        Delete     Delete   button"
                          "Numbers   Numbers    Numbers  button"
                          "Numbers   Numbers    Numbers  button"
                          "Numbers   Numbers    Numbers  button"
@@ -36,7 +42,20 @@ h1 {
 }
 
 .calculadora div {
-    border: 2px solid black;
+    border: 3.5px solid black;
+}
+
+.calculadora .display {
+    grid-column: display;
+    grid-row: display;
+    height: 70px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 15px;
+    background: #5D6D7E;
+    font-size: 45px;
+    margin-bottom: 8px;
 }
 
 .calculadora .numeros {
@@ -50,17 +69,31 @@ h1 {
     border: 0;
 }
 
+.calculadora .numeros div{
+    background-color: #D0D3D4 ;
+    border-radius: 20%;
+    box-shadow: inset 3px 3px 3px rgba(0,0,0,.1);
+}
+
+.calculadora .numeros .igual {
+    background-color: royalblue;
+    box-shadow: inset 3px 3px 3px rgba(0,0,0,.3);
+}
+
 .calculadora .CE {
     grid-column: CE;
     grid-row: CE;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: inset 3px 3px 3px rgba(0,0,0,.1);
+    border-radius: 20%;
+    background-color: #A9CCE3  ;
 }
 
 .calculadora .operaciones {
     display: grid;
-    grid-template-rows: repeat(4,1fr);
+    grid-template-rows: repeat(3,1fr) 2.5fr;
     grid-column: button;
     grid-row: button;
     border: 0;
@@ -71,7 +104,16 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #5499C7;
+    border-radius: 20%;
+    box-shadow: inset 3px 3px 3px rgba(0,0,0,.1);
 }
+
+.calculadora .operaciones .mas {
+    background-color: #FF8000;
+    border-radius: 8%;
+}
+
 
 .calculadora .backspace {
     grid-column: Delete;
@@ -79,6 +121,9 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: inset 3px 3px 3px rgba(0,0,0,.1);
+    border-radius: 4%;
+    background-color: #C0392B ;
 }
 
 .calculadora .numeros .numero {
