@@ -1,20 +1,30 @@
 let valor = "";
+let lengthFirstValu = 0;
+let lengthSecondValu = 0;
 
-function addValue(evento, value = valor, screen = display){
-    let firstValue = 0;
-    let secondValue = 0;
-    let lengthValue;
+function addValue(evento, value = valor, screen = display, lengthFirstValue = lengthFirstValu, lengthSecondValue = lengthSecondValu){
+    let firstValue;
+    let secondValue;
+
     let operator = evento.target.classList[2];
 
     value = evento.target.classList[1];
-    screen.textContent += value;
 
-    if(operator != 'tecla'){
-        lengthValue = screen.textContent.length-1;
-        firstValue = parseInt(screen.textContent.substring(0,lengthValue));
+    if(value == 'igual'){
+        lengthSecondValue = screen.textContent.length;
+        lengthSecondValu = lengthSecondValue;
+        secondValue = parseInt(screen.textContent.substring(lengthFirstValue+1));
     }
 
-    console.log(lengthValue);
+    screen.textContent += value;
+
+    if(operator != 'tecla' && value != 'igual'){
+        lengthFirstValue = screen.textContent.length-1;
+        lengthFirstValu = lengthFirstValue;
+        firstValue = parseInt(screen.textContent.substring(0,lengthFirstValue));
+    }
+
+    console.log(secondValue);
 }
 
 function deleteValue(evento, screen = display){
