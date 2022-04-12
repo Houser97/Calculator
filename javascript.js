@@ -5,6 +5,7 @@ let operatorGlobal = "";
 let firstValu = 0;
 let secondValu = 0;
 let counterOperator = 0;
+let counterPoint = 0;
 
 function addValue(evento, value = valor, screen = display, 
     lengthFirstValue = lengthFirstValu, lengthSecondValue = lengthSecondValu, 
@@ -15,7 +16,16 @@ function addValue(evento, value = valor, screen = display,
     let operatorRecognize = evento.target.classList[2];
 
     value = evento.target.classList[1];
+    let point = evento.target.classList[3];
 
+    if(point == 'punto'){
+        counterPoint += 1;
+    }
+
+    if(point == 'punto' && counterPoint >=2){
+        return;
+    }
+    
     if(value == 'igual'){
         counterOperato = 0;
         counterOperator = 0;
@@ -25,7 +35,7 @@ function addValue(evento, value = valor, screen = display,
         secondValu = secondValue;
 
         operation(operator, firstValue, secondValue);
-        return;
+        return; // it helps to prevent the equal symbol to be displayed
 
     }
 
@@ -34,6 +44,7 @@ function addValue(evento, value = valor, screen = display,
     if(operatorRecognize != 'tecla' && value != 'igual'){
         counterOperator += 1;
         counterOperato += 1;
+        counterPoint = 0;
         
         if(counterOperato == 2){
             counterOperato = 1;
@@ -44,8 +55,6 @@ function addValue(evento, value = valor, screen = display,
             secondValu = secondValue;
             operation(operator, firstValue, secondValue);
             screen.textContent += value;
-            
-
         } 
         lengthFirstValue = screen.textContent.length-1;
         lengthFirstValu = lengthFirstValue;
@@ -60,7 +69,13 @@ function addValue(evento, value = valor, screen = display,
 }
 
 function deleteValue(evento, screen = display, firstValue = firstValu, secondValue = secondValu){
-    positionToKeep = screen.textContent.length-1;
+    let positionToKeep = screen.textContent.length-1;
+    let elementToDelete = screen.textContent.substring(positionToKeep);
+
+    if(elementToDelete == '.'){
+        counterPoint = 0;
+    }
+
     screen.textContent = screen.textContent.substring(0,positionToKeep);
 }
 
@@ -73,6 +88,7 @@ function eraseAll(event, screen = display){
     firstValu = 0;
     secondValu = 0;
     counterOperator = 0;
+    counterPoint = 0;
 }
 
 function operation(operator, firstValue, secondValue){
