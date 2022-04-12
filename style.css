@@ -65,20 +65,34 @@ h1 {
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(4,1fr);
     text-align: center;
-    gap: 3px;
+    gap: 6px;
     border: 0;
 }
 
 .calculadora .numeros div{
-    background-color: #D0D3D4 ;
+    background-color: #bdbdbd ;
     border-radius: 20%;
     box-shadow: inset 3px 3px 3px rgba(0,0,0,.1);
 }
 
+.calculadora .numeros div:hover {background-color: #ffffff}
+
+.calculadora .numeros div:active {
+  background-color: #ffffff;
+  box-shadow: 0 1px black;
+  transform: translateY(1px); }
+
 .calculadora .numeros .igual {
     background-color: royalblue;
-    box-shadow: inset 3px 3px 3px rgba(0,0,0,.3);
+    cursor: pointer;
 }
+
+.calculadora .numeros .igual:hover {background-color: rgb(90, 128, 241)}
+
+.calculadora .numeros .igual:active {
+  background-color: rgb(90, 128, 241);
+  box-shadow: 0 1px black;
+  transform: translateY(1px); }
 
 .calculadora .CE {
     grid-column: CE;
@@ -88,8 +102,17 @@ h1 {
     align-items: center;
     box-shadow: inset 3px 3px 3px rgba(0,0,0,.1);
     border-radius: 20%;
-    background-color: #A9CCE3  ;
+    background-color: #A9CCE3;
+    cursor: pointer;
 }
+
+.calculadora .CE:hover {background-color: #c1dff3}
+
+.calculadora .CE:active {
+  background-color: #c1dff3;
+  box-shadow: 0 1px black;
+  transform: translateY(1px); }
+
 
 .calculadora .operaciones {
     display: grid;
@@ -107,12 +130,28 @@ h1 {
     background: #5499C7;
     border-radius: 20%;
     box-shadow: inset 3px 3px 3px rgba(0,0,0,.1);
+    cursor: pointer;
 }
+
+.calculadora .operaciones div:hover {background-color: #74bcec}
+
+.calculadora .operaciones div:active {
+  background-color: #74bcec;
+  box-shadow: 0 1px black;
+  transform: translateY(1px); }
+
 
 .calculadora .operaciones .mas {
     background-color: #FF8000;
     border-radius: 8%;
 }
+
+.calculadora .operaciones .mas:hover {background-color: #ffa54b}
+
+.calculadora .operaciones .mas:active {
+  background-color: #ffa54b;
+  box-shadow: 0 1px black;
+  transform: translateY(1px); }
 
 
 .calculadora .backspace {
@@ -124,10 +163,21 @@ h1 {
     box-shadow: inset 3px 3px 3px rgba(0,0,0,.1);
     border-radius: 4%;
     background-color: #C0392B ;
+    cursor: pointer;
 }
+
+.calculadora .backspace:hover {background-color: #d65b4d}
+
+.calculadora .backspace:active {
+  background-color: #d65b4d;
+  box-shadow: 0 1px black;
+  transform: translateY(1px); }
+
 
 .calculadora .numeros .numero {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    transition: 0.3s ease all;
 }

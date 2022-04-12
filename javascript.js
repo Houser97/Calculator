@@ -43,6 +43,8 @@ function addValue(evento, value = valor, screen = display,
             secondValue = parseFloat(screen.textContent.substring(lengthFirstValue+1));
             secondValu = secondValue;
             operation(operator, firstValue, secondValue);
+            screen.textContent += value;
+            
 
         } 
         lengthFirstValue = screen.textContent.length-1;
@@ -51,6 +53,7 @@ function addValue(evento, value = valor, screen = display,
         firstValu = firstValue;
         operator = operatorRecognize;
         operatorGlobal = operator; 
+    
         
     }
     
@@ -115,8 +118,9 @@ function div(a,b, screen = display) {
     if(result == 'Infinity'){
         screen.textContent = 'ERROR'; 
     } else {
-    screen.textContent = result;
-    return a/b;}
+        screen.textContent = result;
+    }
+    return a/b;
   };
 
 
