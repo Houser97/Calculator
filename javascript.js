@@ -43,7 +43,7 @@ function addValue(evento, value = valor, screen = display,
             secondValue = parseFloat(screen.textContent.substring(lengthFirstValue+1));
             secondValu = secondValue;
             operation(operator, firstValue, secondValue);
-            screen.textContent += value;
+
         } 
         lengthFirstValue = screen.textContent.length-1;
         lengthFirstValu = lengthFirstValue;
@@ -63,6 +63,13 @@ function deleteValue(evento, screen = display, firstValue = firstValu, secondVal
 
 function eraseAll(event, screen = display){
     screen.textContent = "";
+    valor = "";
+    lengthFirstValu = 0;
+    lengthSecondValu = 0;
+    operatorGlobal = "";
+    firstValu = 0;
+    secondValu = 0;
+    counterOperator = 0;
 }
 
 function operation(operator, firstValue, secondValue){
@@ -86,27 +93,30 @@ function operation(operator, firstValue, secondValue){
 }
 
 function add(a,b, screen = display) {    
-    let result = a+b;
+    let result = Math.round(1000*(a+b))/1000;
     screen.textContent = result;
     return a+b;
   };
 
 function subtract(a,b, screen = display) {
-    let result = a-b;
+    let result = Math.round(1000*(a-b))/1000;
     screen.textContent = result;
     return a-b;
   };
 
 function multiply(a,b, screen = display) {
-    let result = a*b;
+    let result = Math.round(1000*(a*b))/1000;;
     screen.textContent = result;
     return a*b;
   };
 
 function div(a,b, screen = display) {
-    let result = a/b;
+    let result = Math.round(1000*(a/b))/1000;
+    if(result == 'Infinity'){
+        screen.textContent = 'ERROR'; 
+    } else {
     screen.textContent = result;
-    return a/b;
+    return a/b;}
   };
 
 
