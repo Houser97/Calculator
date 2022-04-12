@@ -4,10 +4,12 @@ let lengthSecondValu = 0;
 let operatorGlobal = "";
 let firstValu = 0;
 let secondValu = 0;
+let counterOperator = 0;
 
 function addValue(evento, value = valor, screen = display, 
     lengthFirstValue = lengthFirstValu, lengthSecondValue = lengthSecondValu, 
-    operator = operatorGlobal, firstValue = firstValu, secondValue = secondValu){
+    operator = operatorGlobal, firstValue = firstValu, secondValue = secondValu,
+    counterOperato = counterOperator){
 
 
     let operatorRecognize = evento.target.classList[2];
@@ -15,9 +17,11 @@ function addValue(evento, value = valor, screen = display,
     value = evento.target.classList[1];
 
     if(value == 'igual'){
+        counterOperato = 0;
+        counterOperator = 0;
         lengthSecondValue = screen.textContent.length;
         lengthSecondValu = lengthSecondValue;
-        secondValue = parseInt(screen.textContent.substring(lengthFirstValue+1));
+        secondValue = parseFloat(screen.textContent.substring(lengthFirstValue+1));
         secondValu = secondValue;
 
         operation(operator, firstValue, secondValue);
@@ -28,19 +32,31 @@ function addValue(evento, value = valor, screen = display,
     screen.textContent += value;
 
     if(operatorRecognize != 'tecla' && value != 'igual'){
+        counterOperator += 1;
+        counterOperato += 1;
+        
+        if(counterOperato == 2){
+            counterOperato = 1;
+            counterOperator = 1;
+            lengthSecondValue = screen.textContent.length;
+            lengthSecondValu = lengthSecondValue;
+            secondValue = parseFloat(screen.textContent.substring(lengthFirstValue+1));
+            secondValu = secondValue;
+            operation(operator, firstValue, secondValue);
+            screen.textContent += value;
+        } 
         lengthFirstValue = screen.textContent.length-1;
         lengthFirstValu = lengthFirstValue;
-        firstValue = parseInt(screen.textContent.substring(0,lengthFirstValue));
+        firstValue = parseFloat(screen.textContent.substring(0,lengthFirstValue));
         firstValu = firstValue;
         operator = operatorRecognize;
-        operatorGlobal = operator;
+        operatorGlobal = operator; 
+        
     }
-
-    console.log(firstValue)
-    console.log(secondValue);
+    
 }
 
-function deleteValue(evento, screen = display){
+function deleteValue(evento, screen = display, firstValue = firstValu, secondValue = secondValu){
     positionToKeep = screen.textContent.length-1;
     screen.textContent = screen.textContent.substring(0,positionToKeep);
 }
@@ -69,7 +85,7 @@ function operation(operator, firstValue, secondValue){
     }
 }
 
-function add(a,b, screen = display) {
+function add(a,b, screen = display) {    
     let result = a+b;
     screen.textContent = result;
     return a+b;
