@@ -20,7 +20,7 @@ function addValueClick(evento, screen = display){
         counterPoint += 1;
     }
 
-    if(point == 'punto' && counterPoint >11){
+    if(point == 'punto' && counterPoint >=2){
         return;
     }
     
