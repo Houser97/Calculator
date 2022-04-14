@@ -1,22 +1,20 @@
 let valor = "";
-let lengthFirstValu = 0;
-let lengthSecondValu = 0;
-let operatorGlobal = "";
-let firstValu = 0;
-let secondValu = 0;
+let lengthFirstValue = 0;
+let lengthSecondValue = 0;
+let operator = "";
+let operatorRecognize = '';
+let firstValue = 0;
+let secondValue = 0;
 let counterOperator = 0;
 let counterPoint = 0;
+let point = '';
 
-function addValue(evento, value = valor, screen = display, 
-    lengthFirstValue = lengthFirstValu, lengthSecondValue = lengthSecondValu, 
-    operator = operatorGlobal, firstValue = firstValu, secondValue = secondValu,
-    counterOperato = counterOperator){
+// ------------------------Functions---------------------------------------------//
 
-
-    let operatorRecognize = evento.target.classList[2];
-
-    value = evento.target.classList[1];
-    let point = evento.target.classList[3];
+function addValue(evento, screen = display){
+    operatorRecognize = evento.target.classList[2];
+    valor = evento.target.classList[1];
+    point = evento.target.classList[3];
 
     if(point == 'punto'){
         counterPoint += 1;
@@ -26,49 +24,33 @@ function addValue(evento, value = valor, screen = display,
         return;
     }
     
-    if(value == 'igual'){
-        counterOperato = 0;
+    if(valor == 'igual'){
         counterOperator = 0;
-        lengthSecondValue = screen.textContent.length;
-        lengthSecondValu = lengthSecondValue;
-        secondValue = parseFloat(screen.textContent.substring(lengthFirstValue+1));
-        secondValu = secondValue;
-
+        getSecondValue();
         operation(operator, firstValue, secondValue);
-        return; // it helps to prevent the equal symbol to be displayed
-
+        return; // it helps to prevent the equal symbol from being displayed
     }
 
-    screen.textContent += value;
+    screen.textContent += valor;
 
-    if(operatorRecognize != 'tecla' && value != 'igual'){
+    if(operatorRecognize != 'tecla' && valor != 'igual'){
         counterOperator += 1;
-        counterOperato += 1;
         counterPoint = 0;
         
-        if(counterOperato == 2){
-            counterOperato = 1;
+        if(counterOperator == 2){
             counterOperator = 1;
-            lengthSecondValue = screen.textContent.length;
-            lengthSecondValu = lengthSecondValue;
-            secondValue = parseFloat(screen.textContent.substring(lengthFirstValue+1));
-            secondValu = secondValue;
+            getSecondValue();
             operation(operator, firstValue, secondValue);
-            screen.textContent += value;
-        } 
-        lengthFirstValue = screen.textContent.length-1;
-        lengthFirstValu = lengthFirstValue;
-        firstValue = parseFloat(screen.textContent.substring(0,lengthFirstValue));
-        firstValu = firstValue;
-        operator = operatorRecognize;
-        operatorGlobal = operator; 
-    
+            screen.textContent += valor;
+        } // Not placing an ELSE here helps the calculator to carry on more operations after the firs result.
         
+        getFirstValue();
+        operator = operatorRecognize;
     }
     
 }
 
-function deleteValue(evento, screen = display, firstValue = firstValu, secondValue = secondValu){
+function deleteValue(evento, screen = display){
     let positionToKeep = screen.textContent.length-1;
     let elementToDelete = screen.textContent.substring(positionToKeep);
 
@@ -76,20 +58,29 @@ function deleteValue(evento, screen = display, firstValue = firstValu, secondVal
         counterPoint = 0;
     }
 
+    if(elementToDelete == '+' || elementToDelete == '-' || elementToDelete == 'x' ||
+    elementToDelete == '/'){
+        if(counterOperator >= 2){
+            counterOperator = 1;
+        } else{
+            counterOperator = 0;
+        }
+    }
+
     screen.textContent = screen.textContent.substring(0,positionToKeep);
-}
+};
 
 function eraseAll(event, screen = display){
     screen.textContent = "";
     valor = "";
-    lengthFirstValu = 0;
-    lengthSecondValu = 0;
-    operatorGlobal = "";
-    firstValu = 0;
-    secondValu = 0;
+    lengthSecondValue = 0;
+    lengthFirstValue = 0;
+    operator = "";
+    firstValue = 0;
+    secondValue = 0;
     counterOperator = 0;
     counterPoint = 0;
-}
+};
 
 function operation(operator, firstValue, secondValue){
     switch(operator) {
@@ -109,7 +100,7 @@ function operation(operator, firstValue, secondValue){
             div(firstValue, secondValue);
             break;
     }
-}
+};
 
 function add(a,b, screen = display) {    
     let result = Math.round(1000*(a+b))/1000;
@@ -139,6 +130,17 @@ function div(a,b, screen = display) {
     return a/b;
   };
 
+function getFirstValue(screen = display){
+    lengthFirstValue = screen.textContent.length-1;
+    firstValue = parseFloat(screen.textContent.substring(0,lengthFirstValue));
+};
+
+function getSecondValue(screen = display){
+    lengthSecondValue = screen.textContent.length;
+    secondValue = parseFloat(screen.textContent.substring(lengthFirstValue+1));
+}
+
+// ---------------------------------------------------------------------//
 
 const numero = document.querySelectorAll('.tecla');
 numero.forEach(valor => valor.addEventListener('click', addValue));
