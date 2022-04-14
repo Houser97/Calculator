@@ -20,7 +20,7 @@ function addValueClick(evento, screen = display){
         counterPoint += 1;
     }
 
-    if(point == 'punto' && counterPoint >=2){
+    if(point == 'punto' && counterPoint >11){
         return;
     }
     
@@ -59,11 +59,15 @@ function addValueKeyPad(evento, screen = display){
     const backspace = document.querySelector(`.backspace[data-key="${evento.keyCode}"]`);
     console.log(backspace);
     if(!key) {
-        if(backspace != 'null'){
+        if(backspace){
             deleteValue();
         }
         return;
     };
+
+    if(screen.textContent.length > 11){
+        return;
+    }
  
     
     operatorRecognize = key.classList[2];
