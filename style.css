@@ -49,6 +49,7 @@ h1 {
     grid-column: display;
     grid-row: display;
     height: 70px;
+    overflow: hidden;
     display: flex;
     justify-content: end;
     align-items: center;

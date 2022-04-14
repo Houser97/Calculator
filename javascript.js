@@ -31,6 +31,10 @@ function addValueClick(evento, screen = display){
         return; // it helps to prevent the equal symbol from being displayed
     }
 
+    if(screen.textContent.length > 12){
+        return;
+    }
+
     screen.textContent += valor;
 
     if(operatorRecognize != 'tecla' && valor != 'igual'){
@@ -52,7 +56,15 @@ function addValueClick(evento, screen = display){
 
 function addValueKeyPad(evento, screen = display){
     const key = document.querySelector(`.tecla[data-key="${evento.keyCode}"]`)
-    if(!key) return;
+    const backspace = document.querySelector(`.backspace[data-key="${evento.keyCode}"]`);
+    console.log(backspace);
+    if(!key) {
+        if(backspace != 'null'){
+            deleteValue();
+        }
+        return;
+    };
+ 
     
     operatorRecognize = key.classList[2];
     valor = key.classList[1];
@@ -91,7 +103,7 @@ function addValueKeyPad(evento, screen = display){
     }
 }
 
-function deleteValue(evento, screen = display){
+function deleteValue(evento = null, screen = display){
     let positionToKeep = screen.textContent.length-1;
     let elementToDelete = screen.textContent.substring(positionToKeep);
 
