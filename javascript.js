@@ -11,7 +11,7 @@ let point = '';
 
 // ------------------------Functions---------------------------------------------//
 
-function addValue(evento, screen = display){
+function addValueClick(evento, screen = display){
     operatorRecognize = evento.target.classList[2];
     valor = evento.target.classList[1];
     point = evento.target.classList[3];
@@ -143,7 +143,7 @@ function getSecondValue(screen = display){
 // ---------------------------------------------------------------------//
 
 const numero = document.querySelectorAll('.tecla');
-numero.forEach(valor => valor.addEventListener('click', addValue));
+numero.forEach(valor => valor.addEventListener('click', addValueClick));
 
 const display = document.querySelector('.display');
 
