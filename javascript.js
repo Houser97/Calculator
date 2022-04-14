@@ -50,6 +50,47 @@ function addValueClick(evento, screen = display){
     
 }
 
+function addValueKeyPad(evento, screen = display){
+    const key = document.querySelector(`.tecla[data-key="${evento.keyCode}"]`)
+    if(!key) return;
+    
+    operatorRecognize = key.classList[2];
+    valor = key.classList[1];
+    point = key.classList[3];
+
+    if(point == 'punto'){
+        counterPoint += 1;
+    }
+
+    if(point == 'punto' && counterPoint >=2){
+        return;
+    }
+    
+    if(valor == 'igual'){
+        counterOperator = 0;
+        getSecondValue();
+        operation(operator, firstValue, secondValue);
+        return; // it helps to prevent the equal symbol from being displayed
+    }
+
+    screen.textContent += valor;
+
+    if(operatorRecognize != 'tecla' && valor != 'igual'){
+        counterOperator += 1;
+        counterPoint = 0;
+        
+        if(counterOperator == 2){
+            counterOperator = 1;
+            getSecondValue();
+            operation(operator, firstValue, secondValue);
+            screen.textContent += valor;
+        } // Not placing an ELSE here helps the calculator to carry on more operations after the firs result.
+        
+        getFirstValue();
+        operator = operatorRecognize;
+    }
+}
+
 function deleteValue(evento, screen = display){
     let positionToKeep = screen.textContent.length-1;
     let elementToDelete = screen.textContent.substring(positionToKeep);
@@ -152,3 +193,5 @@ backspace.addEventListener('click', deleteValue);
 
 const CE = document.querySelector('.CE');
 CE.addEventListener('click', eraseAll);
+
+window.addEventListener('keydown', addValueKeyPad);
